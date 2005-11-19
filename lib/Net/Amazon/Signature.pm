@@ -12,28 +12,28 @@ use MIME::Base64;
 
 =head1 NAME
 
-Net::Amazon::Signature;
+Net::Amazon::Signature
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 =head1 SYNOPSIS
 
-use Net::Amazon::Signature;
-my $sig_maker = Net::Amazon::Signature->new(Service => AWSServiceName);
+ use Net::Amazon::Signature;
+ my $sig_maker = Net::Amazon::Signature->new(Service => AWSServiceName);
 
-my ($signature, $timestamp) = $sig_maker->create({
- Operation => 'GetInfo', 
- SecretAccessKey => 'Your Secret Key Here',
- uri_escape => 1
-});
+ my ($signature, $timestamp) = $sig_maker->create({
+  Operation => 'GetInfo', 
+  SecretAccessKey => 'Your Secret Key Here',
+  uri_escape => 1
+ });
 
-# go ahead and make your SOAP or REST call now...
+ # go ahead and make your SOAP or REST call now...
 
 
 =head1 DESCRIPTION
@@ -47,21 +47,20 @@ This module creates the encrypted signature needed to login to Amazon's Mechanic
 
 =head2 new
 
-creates a new Net::Amazon::Signature object
-Takes in a hashref with key Service
-Example
-my $foo = Net::Amazon::Signature->new({Service => 'AWSMechanicalTurkRequester'});
+ creates a new Net::Amazon::Signature object
+ Takes in a hashref with key Service
+ Example
+ my $foo = Net::Amazon::Signature->new({Service => 'AWSMechanicalTurkRequester'});
 
 =cut
 
 =head2 create
 
-creates the signature. takes in a hashref with two required values,
-SecretAccessKey - the secret access key that Amazon has assigned to you.
-Operation - the name of the operation to perform.
+ Creates the signature. The method takes in a hashref with two required values:
+ * SecretAccessKey - the secret access key that Amazon has assigned to you.
+ * Operation - the name of the operation to perform.
 
-returns an array with the signature and the timestamp used in creating the sig.
-Amazon requires both.
+ Returns an array with the signature and the timestamp used in creating the authenticated request.
 
 =cut
 
