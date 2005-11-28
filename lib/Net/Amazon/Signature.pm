@@ -16,11 +16,11 @@ Net::Amazon::Signature
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 =head1 SYNOPSIS
 
@@ -73,7 +73,7 @@ sub create
   my $timestamp = DateTime->now() . 'Z';
   my $operation = $args->{Operation};
   my $sig = $self->Service().$operation.$timestamp;
-  my $digest =$self->make_signature($sig,$args->{SecretAccessKey});
+  my $digest =$self->_make_signature($sig,$args->{SecretAccessKey});
 
   if (defined $args->{uri_escape})
   {
@@ -83,7 +83,14 @@ sub create
   return ($digest, $timestamp);
 }
 
-sub make_signature
+=head2 _make_signature
+
+makes the encoded signature give an unencoded string and a hashing key (the secret access id).
+You do not need to call this function directly. Call create_signature instead.
+
+=cut
+
+sub _make_signature
 {
   my ($sig,$key) =  @_;
   my $hmac = hmac_sha1(@_);
