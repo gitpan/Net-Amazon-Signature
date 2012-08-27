@@ -1,12 +1,16 @@
+use 5.006;
 use strict;
 use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME                => 'Net::Amazon::Signature',
-    AUTHOR              => 'Rachel Richard <rachel@nmcfarl.org>',
+    AUTHOR              => q{Tim Nordenfur <tim@gurka.se>},
     VERSION_FROM        => 'lib/Net/Amazon/Signature.pm',
-    ABSTRACT            => 'Makes secret signature for certain web services on Amazon',
+    ABSTRACT_FROM       => 'lib/Net/Amazon/Signature.pm',
+    ($ExtUtils::MakeMaker::VERSION >= 6.3002
+      ? ('LICENSE'=> 'perl')
+      : ()),
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
